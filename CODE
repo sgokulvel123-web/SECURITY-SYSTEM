@@ -1,0 +1,21 @@
+#define PIR_PIN 2
+#define ALERT_LED 13
+
+void setup() {
+  pinMode(PIR_PIN, INPUT);
+  pinMode(ALERT_LED, OUTPUT);
+  Serial.begin(9600);
+  Serial.println("System Ready. Waiting for motion...");
+}
+
+void loop() {
+  int motionState = digitalRead(PIR_PIN);
+  
+  if (motionState == HIGH) {
+    digitalWrite(ALERT_LED, HIGH);
+    Serial.println("⚠ Motion Detected! Security Alert!");
+    delay(1000);  // Delay to avoid multiple alerts
+  } else {
+    digitalWrite(ALERT_LED, LOW);
+  }
+}
